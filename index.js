@@ -25,38 +25,41 @@ let buyerCardCVV = '541';
   const page = await browser.newPage();
   
   await page.goto(url);
+  try{
+    const cookieBtn = await page.$('#__layout > div > div.cookie-banner.w-100 > div > button');
+    await cookieBtn.click();
   
-  const cookieBtn = await page.$('#__layout > div > div.cookie-banner.w-100 > div > button');
-  await cookieBtn.click();
-
-  const depEl = await page.$('#__layout > div > div.static-index.content > div.bg > div.container > div > div.col-12.mb-5.search-wrapper > div > div > div > form > div.row > div:nth-child(1) > div > div > div > div > input','TPE')
-  await depEl.click();
-  await page.waitFor(500);
-  const depTpe = await page.$('body > div.el-select-dropdown.el-popper > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap.el-scrollbar__wrap--hidden-default > ul > ul:nth-child(1) > li:nth-child(2)')
-  await depTpe.click();
+    const depEl = await page.$('#__layout > div > div.static-index.content > div.bg > div.container > div > div.col-12.mb-5.search-wrapper > div > div > div > form > div.row > div:nth-child(1) > div > div > div > div > input')
+    await depEl.click();
+    await page.waitFor(500);
+    const depTpe = await page.$('body > div.el-select-dropdown.el-popper > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap.el-scrollbar__wrap--hidden-default > ul > ul:nth-child(1) > li:nth-child(2)')
+    await depTpe.click();
+    
+    await page.waitFor(500);
+    const arrCeb = await page.$('body > div:nth-child(9) > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap.el-scrollbar__wrap--hidden-default > ul > ul:nth-child(1) > li:nth-child(2) > ul > li:nth-child(1)');
+    await arrCeb.click();
   
-  await page.waitFor(500);
-  const arrCeb = await page.$('body > div:nth-child(9) > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap.el-scrollbar__wrap--hidden-default > ul > ul:nth-child(1) > li:nth-child(2) > ul > li:nth-child(1)');
-  await arrCeb.click();
-
-
-  await page.waitFor(500);
-  const date = await page.$('#__layout > div > div.static-index.content > div.bg > div.container > div > div.col-12.mb-5.search-wrapper > div > div > div > form > div.row > div.col-12.col-md-12.col-lg-4.mb-3.default-date-picker.mb-lg-0 > div.date-picker.input-border-block.d-none.d-md-block > div > div > div > div > input:nth-child(2)');
-  await date.click();
-  await page.waitFor(500);
-
-  const go = await page.$('body > div.el-picker-panel.el-date-range-picker.el-popper.has-time.starluxCalendar > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr:nth-child(5) > td:nth-child(5) > div > span');
-  await go.click();
-  await page.waitFor(500);
-  const back = await page.$('body > div.el-picker-panel.el-date-range-picker.el-popper.has-time.starluxCalendar > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr:nth-child(6) > td:nth-child(6) > div > span');
-  await back.click();
-  await page.waitFor(500);
-  const dateSelect = await page.$('body > div.el-picker-panel.el-date-range-picker.el-popper.has-time.starluxCalendar > div.el-picker-panel__footer > button.el-button.el-picker-panel__link-btn.el-button--default.el-button--mini.is-plain')
-  await dateSelect.click();
-  await page.waitFor(500);
-
-  const searchBtn = await page.$('#__layout > div > div.static-index.content > div.bg > div.container > div > div.col-12.mb-5.search-wrapper > div > div > div > form > div:nth-child(2) > div > div > button')
-  await searchBtn.click()
+  
+    await page.waitFor(500);
+    const date = await page.$('#__layout > div > div.static-index.content > div.bg > div.container > div > div.col-12.mb-5.search-wrapper > div > div > div > form > div.row > div.col-12.col-md-12.col-lg-4.mb-3.default-date-picker.mb-lg-0 > div.date-picker.input-border-block.d-none.d-md-block > div > div > div > div > input:nth-child(2)');
+    await date.click();
+    await page.waitFor(500);
+  
+    const go = await page.$('body > div.el-picker-panel.el-date-range-picker.el-popper.has-time.starluxCalendar > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr:nth-child(5) > td:nth-child(5) > div > span');
+    await go.click();
+    await page.waitFor(500);
+    const back = await page.$('body > div.el-picker-panel.el-date-range-picker.el-popper.has-time.starluxCalendar > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr:nth-child(6) > td:nth-child(6) > div > span');
+    await back.click();
+    await page.waitFor(500);
+    const dateSelect = await page.$('body > div.el-picker-panel.el-date-range-picker.el-popper.has-time.starluxCalendar > div.el-picker-panel__footer > button.el-button.el-picker-panel__link-btn.el-button--default.el-button--mini.is-plain')
+    await dateSelect.click();
+    await page.waitFor(500);
+  
+    const searchBtn = await page.$('#__layout > div > div.static-index.content > div.bg > div.container > div > div.col-12.mb-5.search-wrapper > div > div > div > form > div:nth-child(2) > div > div > button')
+    await searchBtn.click()
+  }catch(err) {
+    console.log('搜尋航班錯誤', err)
+  }
 
 
   //航班列表
@@ -91,16 +94,19 @@ let buyerCardCVV = '541';
   await page.waitFor(1000)
 
   try{
+    //選稱謂
     await page.waitForSelector('#__layout > div > div.booking.content > div:nth-child(3) > div.container > form.el-form.form-wrap.mb-6 > div.px-3.pt-lg-5.pb-lg-5.pt-5.pb-6.px-md-5.py-md-5 > div.row.mb-0.mb-lg-5 > div.col-12.col-md-4.h-100.mb-lg-0.mb-3 > div > div > div > div > input');
     await page.click('#__layout > div > div.booking.content > div:nth-child(3) > div.container > form.el-form.form-wrap.mb-6 > div.px-3.pt-lg-5.pb-lg-5.pt-5.pb-6.px-md-5.py-md-5 > div.row.mb-0.mb-lg-5 > div.col-12.col-md-4.h-100.mb-lg-0.mb-3 > div > div > div > div > input')
     await page.waitForSelector('body > div.el-select-dropdown.el-popper > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap.el-scrollbar__wrap--hidden-default > ul > li:nth-child(1)')
     await page.click('body > div.el-select-dropdown.el-popper > div.el-scrollbar > div.el-select-dropdown__wrap.el-scrollbar__wrap.el-scrollbar__wrap--hidden-default > ul > li:nth-child(1)');
     
+    //輸入姓名
     await page.focus('#__layout > div > div.booking.content > div:nth-child(3) > div.container > form.el-form.form-wrap.mb-6 > div.px-3.pt-lg-5.pb-lg-5.pt-5.pb-6.px-md-5.py-md-5 > div.row.mb-0.mb-lg-5 > div:nth-child(2) > div > div > div > input');
     await page.keyboard.type(buyerLastName);
     await page.focus('#__layout > div > div.booking.content > div:nth-child(3) > div.container > form.el-form.form-wrap.mb-6 > div.px-3.pt-lg-5.pb-lg-5.pt-5.pb-6.px-md-5.py-md-5 > div.row.mb-0.mb-lg-5 > div:nth-child(3) > div > div > div > input');
     await page.keyboard.type(buyerFirstName);
   
+    //選生日
     const birth = await page.$('#__layout > div > div.booking.content > div:nth-child(3) > div.container > form.el-form.form-wrap.mb-6 > div.px-3.pt-lg-5.pb-lg-5.pt-5.pb-6.px-md-5.py-md-5 > div.row.mb-0.mb-lg-3 > div.col-12.col-md-6.col-lg-4 > div.el-form-item.d-none.d-md-block.mb-3.el-form-item--feedback.is-required > div > div > input');
     await birth.click();
     await page.waitForSelector('body > div.el-picker-panel.el-date-picker.el-popper.birthCalendar > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content > table.el-date-table > tbody > tr:nth-child(4) > td:nth-child(4) > div > span');
@@ -109,6 +115,7 @@ let buyerCardCVV = '541';
     await page.focus('#__layout > div > div.booking.content > div:nth-child(3) > div.container > form.el-form.form-wrap.mb-6 > div.px-3.pt-lg-5.pb-lg-5.pt-5.pb-6.px-md-5.py-md-5 > div:nth-child(3) > div.col-12.col-md-6.col-lg-4 > div > div > div > input');
     await page.keyboard.type(buyerCosmileNumber);
 
+    //填寫聯絡人資料
     await page.focus('#__layout > div > div.booking.content > div:nth-child(3) > div.container > form.el-form.form-wrap.px-3.px-lg-5.pt-4.pb-6.pt-lg-5.pb-lg-5.px-3 > div.row.mb-0.mb-lg-4 > div:nth-child(2) > div > div > div.el-input > input');
     await page.keyboard.type(buyerContactLastName);
     await page.focus('#__layout > div > div.booking.content > div:nth-child(3) > div.container > form.el-form.form-wrap.px-3.px-lg-5.pt-4.pb-6.pt-lg-5.pb-lg-5.px-3 > div.row.mb-0.mb-lg-4 > div:nth-child(3) > div > div > div.el-input > input');
@@ -131,8 +138,7 @@ let buyerCardCVV = '541';
 
   }catch(err){
     console.log('填寫中/送出 錯誤',err)
-    // process.exit(1);
-    // await browser.close();
+ 
   }
 
   await page.waitForNavigation();
@@ -145,6 +151,7 @@ let buyerCardCVV = '541';
   await page.waitForNavigation();
   await page.waitFor(2500)
   try{
+    //選擇信用卡
     await page.waitForSelector('#__layout > div > div.booking.content > div:nth-child(3) > div:nth-child(2) > div > div:nth-child(3) > div > label');
     await page.click('#__layout > div > div.booking.content > div:nth-child(3) > div:nth-child(2) > div > div:nth-child(3) > div > label')
 
@@ -155,6 +162,7 @@ let buyerCardCVV = '541';
     await page.focus('#__layout > div > div.booking.content > div:nth-child(3) > div:nth-child(2) > div > div.radio-card.bg-white.rounded.mb-2.mb-lg-4.active > div.radio-card-content > form.el-form > div:nth-child(4) > div > div > div > div.el-input > input');
     await page.keyboard.type(buyerCardName);
     
+    //信用卡年月選項
     el = await page.$('#__layout > div > div.booking.content > div:nth-child(3) > div:nth-child(2) > div > div.radio-card.bg-white.rounded.mb-2.mb-lg-4.active > div.radio-card-content > form.el-form > div.row.mb-0.mb-md-4.mb-lg-4 > div:nth-child(1) > div > div > div > div.el-input.el-input--suffix > input');
     await el.click();
     await page.waitFor(500);//等下拉選單出現
