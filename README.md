@@ -4,7 +4,8 @@
 ```javascript
 headless = true; //無頭模式，false則會開啟設定的瀏覽器執行
 url = 'http://localhost:3000/'; //要執行位置的url
-let executablePath = ''; //空值預設為chromium 以Macbook若需要Chromey則設為 '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+//空值預設為chromium 以Macbook若需要Chromey則設為 '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+executablePath = ''; 
 buyerFirstName = 'TEST'; //購票名
 buyerLastName = "TEST";  //購票姓
 buyerCosmileNumber = ''; //option
@@ -18,6 +19,11 @@ buyerCardNumber = '4938170188888994'
 buyerCardCVV = '541';
 ```
 
+### 安裝
+```
+git clone
+npm install
+```
 ### 執行
 ```node
 node index.js
