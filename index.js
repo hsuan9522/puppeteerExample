@@ -1,7 +1,8 @@
 const puppeteer = require('puppeteer');
 
-let headless = true;
+let headless = false;
 let url = 'http://localhost:3000/';
+let executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 let buyerFirstName = 'TEST';
 let buyerLastName = "TEST";
 let buyerCosmileNumber = ''; //option
@@ -18,7 +19,7 @@ let buyerCardCVV = '541';
   let el;
   const browser = await puppeteer.launch({
     headless: headless,
-    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    executablePath: executablePath,
   });
 
   const page = await browser.newPage();
@@ -102,9 +103,11 @@ let buyerCardCVV = '541';
   
     const birth = await page.$('#__layout > div > div.booking.content > div:nth-child(3) > div.container > form.el-form.form-wrap.mb-6 > div.px-3.pt-lg-5.pb-lg-5.pt-5.pb-6.px-md-5.py-md-5 > div.row.mb-0.mb-lg-3 > div.col-12.col-md-6.col-lg-4 > div.el-form-item.d-none.d-md-block.mb-3.el-form-item--feedback.is-required > div > div > input');
     await birth.click();
-
     await page.waitForSelector('body > div.el-picker-panel.el-date-picker.el-popper.birthCalendar > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content > table.el-date-table > tbody > tr:nth-child(4) > td:nth-child(4) > div > span');
     await page.click('body > div.el-picker-panel.el-date-picker.el-popper.birthCalendar > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content > table.el-date-table > tbody > tr:nth-child(4) > td:nth-child(4) > div > span');
+    
+    await page.focus('#__layout > div > div.booking.content > div:nth-child(3) > div.container > form.el-form.form-wrap.mb-6 > div.px-3.pt-lg-5.pb-lg-5.pt-5.pb-6.px-md-5.py-md-5 > div:nth-child(3) > div.col-12.col-md-6.col-lg-4 > div > div > div > input');
+    await page.keyboard.type(buyerCosmileNumber);
 
     await page.focus('#__layout > div > div.booking.content > div:nth-child(3) > div.container > form.el-form.form-wrap.px-3.px-lg-5.pt-4.pb-6.pt-lg-5.pb-lg-5.px-3 > div.row.mb-0.mb-lg-4 > div:nth-child(2) > div > div > div.el-input > input');
     await page.keyboard.type(buyerContactLastName);
@@ -196,9 +199,9 @@ let buyerCardCVV = '541';
   await page.waitForSelector('#__layout > div > div.booking.content > div.complete > div.container-fluid > div > div > div > div > div > div > div.col-12.col-lg-4 > div > div > div.head.d-flex.justify-content-between > div')
   el = await page.$('#__layout > div > div.booking.content > div.complete > div.container-fluid > div > div > div > div > div > div > div.col-12.col-lg-4 > div > div > div.head.d-flex.justify-content-between > div');
   const text = await page.evaluate(item => item.textContent, el);
-  console.log('PNR ： ',text);
-  console.log('FirstName ： ', buyerFirstName)
-  console.log('LastName ： ', buyerLastName)
+  console.log('PNR      ：',text);
+  console.log('FirstName：', buyerFirstName)
+  console.log('LastName ：', buyerLastName)
   process.exit(1);
 
 })();
