@@ -19,6 +19,11 @@ buyerCardNumber = '4938170188888994'
 buyerCardCVV = '541';
 ```
 
+### 安裝
+```
+git clone
+npm install
+```
 ### 執行
 ```node
 node index.js
